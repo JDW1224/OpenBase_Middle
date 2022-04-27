@@ -18,35 +18,35 @@ char *Create()
 	scanf("%s", &Id);
 
 	printf("\n몇자리를 원하는지 입력하세요 : ");
-	scanf_s(" %d", &N);
+	scanf(" %d", &N);
 	
-	char *password = malloc(sizeof(char) * N);
-
-	printf("\n------> 입력 : ");
+	char *password = (char*)malloc(sizeof(char) * (N+1));
 
 
 	char sym[] = {'@','!','#','^','*','&'};
 
 	int i = 0;
-
-	for (int i = 0; i < N; i++) {
-		switch (rand() % 4) {
-		case 1:
-			password[i] = rand() % 26 + 65;
-			break;
-		case 2:
-			password[i] = rand() % 26 + 97;
-			break;
-		case 3:
-			password[i] = rand() % 10 + 48;
-			break;
-		case 0:
-			password[i] = sym[rand() % 6];
-			break;
+	srand(time(NULL));
+	do {
+		for (int i = 0; i < N; i++) {
+			switch (rand() % 4) {
+			case 1:
+				password[i] = rand() % 26 + 65;
+				break;
+			case 2:
+				password[i] = rand() % 26 + 97;
+				break;
+			case 3:
+				password[i] = rand() % 10 + 48;
+				break;
+			case 0:
+				password[i] = sym[rand() % 6];
+				break;
+			}
 		}
-	}
+		printf("%s\n", password);
+	} while (Check(password));
 	
-	Check(password);
 
 	printf("\n\nYour Password: ");
 	for (int i = 0; i < N; i++) {
@@ -64,13 +64,12 @@ char *Create()
 
 }
 
-int Check(char *password[])
+int Check(char password[])
 {
-	int i = 0, length = 0, upper = 0, lower = 0, special = 0, num = 0;
-
+	int i = 0, upper = 0, lower = 0, special = 0, num = 0;
 
 	// 암호에 대소문자, 특수문자, 숫자, 공백 있는지 확인
-	for (; i < length; i++) {
+	for (i=0; i < strlen(password); i++) {
 		if (isupper(password[i]))
 			upper++;
 		else if (islower(password[i]))
@@ -81,17 +80,12 @@ int Check(char *password[])
 			special++;
 	}
 
-	// 암호 길이가 10글자 미만, 공백 포함, 암호에 영문자 대소문자, 특수문자, 숫자 중 어느 하나라도 없는 경우
-	if (length < 10 || upper < 1 || lower < 1 || special < 1 || num < 1) {
-
-		printf("\n%d", *password);
-		printf("\n암호 생성 조건에 일치하지 않습니다.\n");
-
-		// 아무 키나 입력 받고 다음 단계로 넘어가는 함수를 호출
-		Next();
-
-		// 처음부터 시작
-		main();
+	// 공백 포함, 암호에 영문자 대소문자, 특수문자, 숫자 중 어느 하나라도 없는 경우
+	if (upper < 1 || lower < 1 || special < 1 || num < 1) {
+		return 1;
+	}
+	else {
+		return 0;
 	}
 }
 

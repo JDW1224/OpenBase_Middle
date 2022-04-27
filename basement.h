@@ -56,14 +56,14 @@ int Finish()// 암호 프로그램을 종료할 건지 물어보는 함수
 	}
 }
 
-char Guide(char select)// 암호 프로그램을 안내하는 함수
+char Guide(int select)// 암호 프로그램을 안내하는 함수
 {
 	printf("암호생성기입니다.\n");
 	printf("원하는 기능을 선택해주세요.\n\n");
 	printf("1. 암호 생성\nx. 종료\n\n");
 	printf("------> 입력 : ");
 
-	scanf(" %c", &select);        // 사용자로부터 어떤 기능을 실행할지 입력 받음
+	scanf(" %d", &select);        // 사용자로부터 어떤 기능을 실행할지 입력 받음
 
 	return select;        // main 함수의 select로 값을 반환
 }

@@ -6,7 +6,8 @@
 
 int main()
 {
-	char select = 0, *password = { 0, };
+	int select = 0;
+	char *password = { 0, };
 	int count = 0;
 
 	while (1)
@@ -16,7 +17,7 @@ int main()
 
 		// 사용자가 입력한 값에 따라 해당 기능을 실행
 		switch (select) {
-		case '1':
+		case 1:
 			// 새로운 암호를 생성하는 함수를 호출
 			password = Create();
 
