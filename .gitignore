@@ -1,0 +1,13 @@
+# Runtime output can contain account and password data.
+Id_Password.txt
+
+# Visual Studio and compiler output
+.vs/
+Debug/
+Release/
+x64/
+x86/
+*.exe
+*.obj
+*.pdb
+*.ilk
